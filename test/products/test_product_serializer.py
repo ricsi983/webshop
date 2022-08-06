@@ -55,7 +55,7 @@ class TestProductSerializer(unittest.TestCase):
                 "price": 2,
                 "image": "test_image_2",
                 "description": "test_description_2",
-                "available": True
+                "available": False
             }
         ]
         assert test_serializer.serialize() == expected_result
