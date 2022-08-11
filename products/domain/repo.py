@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class IProductRepository(ABC):
 
     @abstractmethod
-    def add_product(self, crypto):
+    def add_product(self, product):
         pass
 
     @abstractmethod

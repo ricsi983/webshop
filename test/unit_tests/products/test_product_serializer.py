@@ -19,7 +19,7 @@ class TestProductSerializer(unittest.TestCase):
             "price": 1,
             "image": "test_image",
             "description": "test_description",
-            "available": False
+            "available": "False"
         }
         assert test_serializer.serialize() == expected_result
 
@@ -48,14 +48,14 @@ class TestProductSerializer(unittest.TestCase):
                 "price": 1,
                 "image": "test_image_1",
                 "description": "test_description_1",
-                "available": False
+                "available": "False"
             },
             {
                 "name": "test_product_2",
                 "price": 2,
                 "image": "test_image_2",
                 "description": "test_description_2",
-                "available": False
+                "available": "True"
             }
         ]
         assert test_serializer.serialize() == expected_result

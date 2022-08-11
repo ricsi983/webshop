@@ -1,18 +1,8 @@
 from rest_framework.views import APIView
 from products.infrastructure.simplerepo import SimpleProductRepository
 from products.application.service import ProductService
-from products.application.exceptions import *
 from rest_framework.response import Response
-from rest_framework import status
-
-
-def map_exception(e):
-    if type(e) is InvalidProductRequestException:
-        return status.HTTP_400_BAD_REQUEST
-    elif type(e) is ProductNotFoundException:
-        return status.HTTP_404_NOT_FOUND
-    else:
-        return status.HTTP_500_INTERNAL_SERVER_ERROR
+from products.application.methods import HttpMethods
 
 
 class ProductController(APIView):
@@ -21,12 +11,13 @@ class ProductController(APIView):
         self.__service = ProductService(SimpleProductRepository())
 
     def get(self, request):
-        response = {
-            "status": status.HTTP_200_OK,
-            "data": ""
-        }
-        try:
-            response["data"] = self.__service.handle_request(request)
-        except Exception as e:
-            response["status"] = map_exception(e)
-        return Response(response["data"], response["status"])
+        response = self.__service.handle_request(HttpMethods.GET, request)
+        return Response(response.description, response.status)
+
+    def post(self, request):
+        response = self.__service.handle_request(HttpMethods.POST, request)
+        return Response(response.description, response.status)
+
+    def delete(self, request):
+        response = self.__service.handle_request(HttpMethods.DELETE, request)
+        return Response(response.description, response.status)

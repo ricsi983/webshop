@@ -9,10 +9,12 @@ class SimpleProductRepository(IProductRepository):
         pass
 
     def add_product(self, product):
-        pass
+        SimpleProductRepository.products.append(product)
 
     def remove_product_by_name(self, name):
-        pass
+        for product in SimpleProductRepository.products:
+            if product.get_name() == name:
+                SimpleProductRepository.products.remove(product)
 
     def get_all_products(self):
         return SimpleProductRepository.products
